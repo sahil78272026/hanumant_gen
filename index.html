@@ -41,7 +41,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
 
   body {
     background: var(--bg);
@@ -50,6 +50,8 @@
     font-weight: 400;
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
     background-image:
       linear-gradient(var(--grid) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid) 1px, transparent 1px);
@@ -257,11 +259,11 @@
 
   /* ===== HERO ===== */
   .hero {
-    min-height: 100vh;
-    padding: 10rem 3rem 4rem;
+    min-height: calc(100vh - 80px);
+    padding: 7rem 3rem 4rem;
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 3rem;
     align-items: center;
     position: relative;
     overflow: hidden;
@@ -340,6 +342,37 @@
     opacity: 0;
     animation: fadeUp 0.8s 0.8s forwards;
   }
+
+  /* Hero trust strip — fills the empty left column space */
+  .hero-trust {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.1s forwards;
+  }
+  .trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .trust-item .num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.8rem;
+    color: var(--amber);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .trust-item .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
   .btn-primary, .btn-ghost {
     padding: 1rem 2rem;
     font-family: 'JetBrains Mono', monospace;
@@ -369,7 +402,8 @@
   .machine-stage {
     position: relative;
     width: 100%;
-    height: 600px;
+    max-width: 100%;
+    height: 520px;
     opacity: 0;
     animation: fadeUp 0.8s 0.8s forwards;
   }
@@ -540,9 +574,9 @@
     box-shadow: 0 0 8px var(--amber);
     animation: ledPulse 1.6s infinite;
   }
-  .stat-1 { top: 8%; right: -8%; animation-delay: 1.5s; }
-  .stat-2 { top: 45%; left: -12%; animation-delay: 1.8s; }
-  .stat-3 { bottom: 12%; right: -2%; animation-delay: 2.1s; }
+  .stat-1 { top: 4%; right: 0; animation-delay: 1.5s; }
+  .stat-2 { top: 42%; left: 0; animation-delay: 1.8s; }
+  .stat-3 { bottom: 8%; right: 4%; animation-delay: 2.1s; }
   @keyframes pillIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -980,21 +1014,31 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
-    .top-strip { padding: 0.5rem 1rem; font-size: 0.68rem; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .top-strip { padding: 0.5rem 0.7rem; font-size: 0.65rem; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
     .top-strip .left { display: none; }
-    .top-strip .contact-block { gap: 0.7rem; }
-    nav { padding: 1rem 1.5rem; top: 36px; }
+    .top-strip .contact-block { gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+    .top-strip .person { font-size: 0.62rem; }
+    .top-strip .phone { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+    .strip-wa { font-size: 0.62rem; padding: 0.2rem 0.5rem; }
+    nav { padding: 1rem 1.2rem; top: 56px; }
+    .logo { font-size: 1rem; }
+    .nav-cta { padding: 0.5rem 0.9rem; font-size: 0.7rem; }
     .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; padding: 9rem 1.5rem 3rem; gap: 3rem; }
-    section { padding: 4rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 8rem 1.25rem 3rem; gap: 2rem; min-height: auto; }
+    .hero-trust { gap: 1.5rem; margin-top: 2rem; }
+    .trust-item .num { font-size: 1.4rem; }
+    .machine-stage { height: 400px; max-width: 100%; overflow: visible; }
+    .stat-pill { display: none; }
+    section { padding: 4rem 1.25rem; }
     .how-grid, .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
     .how-diagram { position: static; }
     .form-row.two { grid-template-columns: 1fr; }
-    .range-table { font-size: 0.8rem; }
-    .range-table th, .range-table td { padding: 0.8rem 0.5rem; }
-    .wa-float { width: 56px; height: 56px; bottom: 20px; right: 20px; }
+    .range-table { font-size: 0.75rem; }
+    .range-table th, .range-table td { padding: 0.7rem 0.4rem; }
+    .wa-float { width: 56px; height: 56px; bottom: 18px; right: 18px; z-index: 500; }
     .wa-float svg { width: 28px; height: 28px; }
     .wa-label { display: none; }
+    footer { padding: 2rem 1.25rem; font-size: 0.7rem; flex-direction: column; text-align: center; gap: 0.5rem; }
   }
 </style>
 </head>
@@ -1044,6 +1088,24 @@
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Request a Quote →</a>
       <a href="#services" class="btn-ghost">Explore Services</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <span class="num">600+</span>
+        <span class="lbl">Installations</span>
+      </div>
+      <div class="trust-item">
+        <span class="num">12+</span>
+        <span class="lbl">Years experience</span>
+      </div>
+      <div class="trust-item">
+        <span class="num">24/7</span>
+        <span class="lbl">Support · NCR</span>
+      </div>
+      <div class="trust-item">
+        <span class="num">5–500</span>
+        <span class="lbl">kVA range</span>
+      </div>
     </div>
   </div>
   <div class="machine-stage">
